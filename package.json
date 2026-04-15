@@ -1,0 +1,16 @@
+{
+  "name": "anastasia-insurance",
+  "version": "1.0.0",
+  "description": "Anastasia Insurance recruitment API",
+  "main": "functions/api/recruit.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "keywords": [],
+  "author": "Zhenia Motolov",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

@@ -1,0 +1,12 @@
+name = "anastasia-insurance"
+main = "functions/api/recruit.js"
+type = "javascript"
+
+[env.production]
+vars = { }
+
+[[env.production.kv_namespaces]]
+binding = "KV"
+
+[build]
+command = "echo 'No build step needed'"
