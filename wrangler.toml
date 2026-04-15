@@ -1,5 +1,5 @@
 name = "anastasia-insurance"
-main = "functions/api/recruit.js"
+main = "worker.js"
 compatibility_date = "2026-04-15"
 
 [env.production]
