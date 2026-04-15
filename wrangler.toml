@@ -1,11 +1,9 @@
 name = "anastasia-insurance"
-main = "worker.js"
+main = "functions/api/recruit.js"
 compatibility_date = "2026-04-15"
 
 [env.production]
 vars = { }
 
-[env.production.secrets]
-# Add your secrets in Cloudflare dashboard:
-# TELEGRAM_BOT_TOKEN = "your-bot-token"
-# TELEGRAM_CHAT_ID = "your-chat-id"
+[[env.production.kv_namespaces]]
+binding = "KV"
