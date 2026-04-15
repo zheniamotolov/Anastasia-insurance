@@ -5,5 +5,5 @@ compatibility_date = "2026-04-15"
 [env.production]
 vars = { }
 
-[[env.production.kv_namespaces]]
-binding = "KV"
+# [[env.production.kv_namespaces]]
+# binding = "KV"
