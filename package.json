@@ -2,7 +2,7 @@
   "name": "anastasia-insurance",
   "version": "1.0.0",
   "description": "Anastasia Insurance recruitment API",
-  "main": "functions/api/recruit.js",
+  "main": "worker.js",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev"
