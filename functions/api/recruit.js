@@ -60,3 +60,14 @@ export async function onRequestOptions() {
     },
   });
 }
+
+export default {
+  async fetch(request, env, ctx) {
+    if (request.method === 'POST') {
+      return onRequestPost({ request, env, ctx });
+    } else if (request.method === 'GET') {
+      return new Response('GET method handled', { status: 200 });
+    }
+    return new Response('Method Not Allowed', { status: 405 });
+  },
+};
