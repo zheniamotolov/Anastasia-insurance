@@ -7,8 +7,6 @@ export async function onRequestPost(context) {
   try {
     const data = await context.request.json();
 
-    const times = Array.isArray(data.availability) ? data.availability.join(', ') : (data.availability || 'Not specified');
-
     const text = [
       '\u{1F4CB} New Recruit Application',
       '',
@@ -16,13 +14,9 @@ export async function onRequestPost(context) {
       `\u{1F4E7} Email: ${data.email || ''}`,
       `\u{1F4F1} Phone: ${data.phone || ''}`,
       '',
-      `\u{1F4CD} Address:`,
-      `${data.street || ''}`,
-      `${data.city || ''}, ${data.state || ''} ${data.zip || ''}`,
+      `\u{1F4CD} Location: ${data.city || ''}, ${data.state || ''}`,
       '',
       `\u{1F4F8} Instagram: ${data.instagram ? '@' + data.instagram : 'Not provided'}`,
-      '',
-      `\u{1F550} Available: ${times}`,
       '',
       `\u{1F4DD} Notes:`,
       data.notes || 'None',
