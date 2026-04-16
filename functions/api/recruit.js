@@ -1,7 +1,7 @@
-export async function onRequestPost(context) {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+export async function onRequestPost(context) {                                                                                                                                                                                                    
+    const headers = {                                       
+      'Content-Type': 'application/json',                                                                                                                                                                                                           
+      'Access-Control-Allow-Origin': '*',                   
     };
 
     try {
@@ -29,19 +29,19 @@ export async function onRequestPost(context) {
       ].join('\n');
 
       const telegramUrl = `https://api.telegram.org/bot${context.env.TELEGRAM_BOT_TOKEN}/sendMessage`;
+      const chatIds = context.env.TELEGRAM_CHAT_IDS.split(',');
 
-      const tgResponse = await fetch(telegramUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: context.env.TELEGRAM_CHAT_ID,
-          text: text,
-        }),
-      });
+      const results = await Promise.all(chatIds.map(id =>
+        fetch(telegramUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id: id.trim(), text: text }),
+        })
+      ));
 
-      if (!tgResponse.ok) {
-        const err = await tgResponse.text();
-        return new Response(JSON.stringify({ success: false, error: err }), { status: 502, headers });
+      const failed = results.filter(r => !r.ok);
+      if (failed.length === results.length) {
+        return new Response(JSON.stringify({ success: false, error: 'All messages failed' }), { status: 502, headers });
       }
 
       return new Response(JSON.stringify({ success: true }), { status: 200, headers });
