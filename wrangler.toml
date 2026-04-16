@@ -1,4 +1,3 @@
 name = "anastasia-insurance"
 compatibility_date = "2026-04-15"
-
-main = "functions/api/recruit.js"
+main = "./functions/api/recruit.js"

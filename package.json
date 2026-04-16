@@ -4,8 +4,8 @@
   "description": "Anastasia Insurance recruitment API",
   "main": "functions/api/recruit.js",
   "scripts": {
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev"
+    "deploy": "wrangler deploy functions/api/recruit.js",
+    "dev": "wrangler dev functions/api/recruit.js"
   },
   "keywords": [],
   "author": "Zhenia Motolov",
