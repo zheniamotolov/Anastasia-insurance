@@ -879,12 +879,61 @@
     });
 
     // Form submit
-    document.getElementById('consultForm').addEventListener('submit', (e) => {
+    document.getElementById('consultForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
-      form.style.display = 'none';
-      document.getElementById('successMessage').classList.add('show');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const btn = form.querySelector('.submit-btn');
+      const btnText = btn.innerHTML;
+
+      btn.disabled = true;
+      btn.innerHTML = 'Sending\u2026';
+
+      const availability = Array.from(
+        form.querySelectorAll('input[name="meetingTime"]:checked')
+      ).map(cb => cb.value);
+
+      const planType = Array.from(
+        form.querySelectorAll('input[name="planType"]:checked')
+      ).map(cb => cb.value);
+
+      const services = Array.from(
+        form.querySelectorAll('input[name="services"]:checked')
+      ).map(cb => cb.value);
+
+      const data = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        street: document.getElementById('street').value,
+        street2: document.getElementById('street2').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zip: document.getElementById('zip').value,
+        availability,
+        planType,
+        services,
+        otherText: document.getElementById('otherText').value,
+        notes: document.getElementById('notes').value,
+      };
+
+      try {
+        const res = await fetch('/api/consult', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error('Server error');
+
+        form.style.display = 'none';
+        document.getElementById('successMessage').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        alert('Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.innerHTML = btnText;
+      }
     });
 
     // Subtle entrance animation for form groups
