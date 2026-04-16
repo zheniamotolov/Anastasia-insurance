@@ -1,1 +1,0 @@
-This folder contains the built output assets for the worker "anastasia-insurance" generated at 2026-04-15T13:16:17.844Z.
