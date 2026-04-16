@@ -1,12 +1,4 @@
 name = "anastasia-insurance"
 compatibility_date = "2026-04-15"
 
-[env.production]
-vars = { }
-
 main = "functions/api/recruit.js"
-
-[site]
-bucket = "./"
-entry-point = "functions"
-pages_build_output_dir = "./"
