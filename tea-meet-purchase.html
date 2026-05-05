@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Финансовое чаепитие — Оплата</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: #e5e0d8;
+      --text-primary: #2d2a26;
+      --text-secondary: #6b6560;
+      --text-muted: #9c958e;
+      --accent: #6b8f71;
+      --accent-light: #eef4ef;
+      --accent-hover: #5a7a5f;
+      --gold: #c9a96e;
+      --gold-light: #faf5eb;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+      --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* --- Language Toggle --- */
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lang-toggle button {
+      padding: 8px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    /* --- Payment Card --- */
+    .payment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 48px 40px;
+      box-shadow: var(--shadow-md);
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      animation: fadeInUp 0.5s ease-out;
+    }
+
+    .payment-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .payment-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .payment-description {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .payment-price {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--accent-light);
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .pay-btn {
+      width: 100%;
+      padding: 16px 32px;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #ffffff;
+      background: var(--accent);
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .pay-btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(107,143,113,0.3);
+    }
+
+    .pay-btn:active {
+      transform: translateY(0);
+    }
+
+    .pay-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* --- Success State --- */
+    .success-state {
+      display: none;
+    }
+
+    .success-state.show {
+      display: block;
+    }
+
+    .default-state.hide {
+      display: none;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--accent-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      color: var(--accent);
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .success-text {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 320px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* --- Footer --- */
+    .footer {
+      text-align: center;
+      padding: 32px 24px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer a:hover {
+      color: var(--accent);
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 480px) {
+      body { padding: 16px; }
+      .payment-card { padding: 32px 20px; }
+      .payment-title { font-size: 1.6rem; }
+      .lang-toggle { top: 10px; right: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="btn-ru" class="active" onclick="setLang('ru')">RU</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <div class="payment-card">
+    <!-- Default / Pay State -->
+    <div class="default-state" id="defaultState">
+      <div class="payment-icon">&#127861;</div>
+      <h1 class="payment-title" data-ru="Финансовое чаепитие" data-en="Financial Tea Party">Финансовое чаепитие</h1>
+      <p class="payment-description" data-ru="Уютная встреча за чашкой чая с разбором финансовых вопросов в кругу единомышленниц" data-en="A cozy tea gathering with financial insights among like-minded women">Уютная встреча за чашкой чая с разбором финансовых вопросов в кругу единомышленниц</p>
+      <div class="payment-price" data-ru="Участие платное" data-en="Paid event">Участие платное</div>
+      <button class="pay-btn" id="payBtn" data-ru="Оплатить" data-en="Pay Now">Оплатить</button>
+    </div>
+
+    <!-- Success State -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <h2 class="success-title" data-ru="Оплата прошла успешно!" data-en="Payment Successful!">Оплата прошла успешно!</h2>
+      <p class="success-text" data-ru="Спасибо! Мы свяжемся с вами с деталями мероприятия." data-en="Thank you! We'll reach out with event details soon.">Спасибо! Мы свяжемся с вами с деталями мероприятия.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2026 Financial Tea Meeting &middot; <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></p>
+  </div>
+
+  <script>
+    // --- Language Toggle ---
+    function setLang(lang) {
+      localStorage.setItem('tea-meet-lang', lang);
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('[data-ru][data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+    }
+
+    // Initialize language
+    const savedLang = localStorage.getItem('tea-meet-lang') || 'ru';
+    setLang(savedLang);
+
+    // --- Handle URL params ---
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('success') === '1') {
+      document.getElementById('defaultState').classList.add('hide');
+      document.getElementById('successState').classList.add('show');
+    }
+
+    if (params.get('canceled') === '1') {
+      const lang = localStorage.getItem('tea-meet-lang') || 'ru';
+      alert(lang === 'ru' ? 'Оплата была отменена. Вы можете попробовать снова.' : 'Payment was canceled. You can try again.');
+    }
+
+    // --- Pay Button ---
+    document.getElementById('payBtn').addEventListener('click', async () => {
+      const btn = document.getElementById('payBtn');
+      const lang = localStorage.getItem('tea-meet-lang') || 'ru';
+      btn.disabled = true;
+      btn.textContent = lang === 'ru' ? 'Перенаправление\u2026' : 'Redirecting\u2026';
+
+      try {
+        const res = await fetch('/api/tea-meet-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({}),
+        });
+
+        const result = await res.json();
+
+        if (result.url) {
+          window.location.href = result.url;
+        } else {
+          throw new Error('No checkout URL');
+        }
+      } catch (err) {
+        alert(lang === 'ru' ? 'Произошла ошибка. Попробуйте ещё раз.' : 'Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = btn.getAttribute('data-' + lang);
+      }
+    });
+  </script>
+
+</body>
+</html>

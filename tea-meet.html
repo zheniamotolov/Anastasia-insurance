@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Financial Tea Meeting — Miami</title>
+  <title>Финансовое чаепитие — Miami</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
@@ -49,6 +49,37 @@
       max-width: 1080px;
       margin: 0 auto;
       padding: 0 24px;
+    }
+
+    /* --- Language Toggle --- */
+    .lang-toggle {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .lang-toggle button {
+      padding: 8px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: #ffffff;
     }
 
     /* --- Hero Section --- */
@@ -166,14 +197,6 @@
       color: var(--text-primary);
     }
 
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-secondary);
-      font-size: 1.05rem;
-      max-width: 600px;
-      margin: -32px auto 48px;
-    }
-
     /* --- About / Value Props --- */
     .cards-grid {
       display: grid;
@@ -264,87 +287,6 @@
       line-height: 1.5;
     }
 
-    /* --- Format Strip --- */
-    .format-strip {
-      background: var(--accent);
-      padding: 60px 24px;
-      text-align: center;
-    }
-
-    .format-strip .section-title {
-      color: #ffffff;
-      margin-bottom: 40px;
-    }
-
-    .format-items {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .format-item {
-      text-align: center;
-      color: #ffffff;
-    }
-
-    .format-item .fmt-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-
-    .format-item h4 {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .format-item p {
-      font-size: 13px;
-      opacity: 0.85;
-    }
-
-    /* --- Who Is This For --- */
-    .for-list {
-      max-width: 620px;
-      margin: 0 auto;
-      list-style: none;
-    }
-
-    .for-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 16px 0;
-      font-size: 1.05rem;
-      color: var(--text-primary);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .for-list li:last-child {
-      border-bottom: none;
-    }
-
-    .for-list .check {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--accent-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .for-list .check svg {
-      width: 14px;
-      height: 14px;
-      color: var(--accent);
-    }
-
     /* --- Speakers --- */
     .speakers-grid {
       display: grid;
@@ -369,17 +311,15 @@
     }
 
     .speaker-avatar {
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-light), var(--gold-light));
+      object-fit: cover;
+      object-position: center top;
       border: 3px solid var(--surface);
       box-shadow: var(--shadow-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       margin: 0 auto 20px;
-      font-size: 36px;
+      display: block;
     }
 
     .speaker-card h3 {
@@ -873,7 +813,6 @@
       .cards-grid { grid-template-columns: 1fr; gap: 16px; }
       .cards-grid-4 { grid-template-columns: 1fr 1fr; gap: 16px; }
       .speakers-grid { grid-template-columns: 1fr; gap: 20px; }
-      .format-items { gap: 32px; }
       .details-card { padding: 32px 24px; }
       .bonus-banner { padding: 32px 24px; }
       .form-card { padding: 32px 24px; }
@@ -883,169 +822,128 @@
 
     @media (max-width: 480px) {
       .cards-grid-4 { grid-template-columns: 1fr; }
-      .format-items { flex-direction: column; gap: 24px; }
       .radio-group { flex-direction: column; }
+      .lang-toggle { top: 10px; right: 10px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="btn-ru" class="active" onclick="setLang('ru')">RU</button>
+    <button id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
+
   <!-- 1. Hero -->
   <section class="hero">
-    <div class="hero-icon">🍵</div>
+    <div class="hero-icon">&#127861;</div>
     <div class="hero-badge">
       <span class="dot"></span>
-      Limited Seats Available
+      <span data-ru="Количество мест ограничено" data-en="Limited Seats Available">Количество мест ограничено</span>
     </div>
-    <h1>Financial Tea Meeting</h1>
-    <p>An intimate gathering where finance meets a tea ceremony. Learn to manage your money in a calm, welcoming atmosphere — over a cup of exquisite tea in Miami.</p>
+    <h1 data-ru="Финансовое чаепитие" data-en="Financial Tea Party">Финансовое чаепитие</h1>
+    <p data-ru="Уютная встреча, где финансы встречаются с чайной церемонией. Научитесь управлять деньгами в спокойной атмосфере — за чашкой изысканного чая в Майами." data-en="An intimate gathering where finance meets a tea ceremony. Learn to manage your money in a calm, welcoming atmosphere — over a cup of exquisite tea in Miami.">Уютная встреча, где финансы встречаются с чайной церемонией. Научитесь управлять деньгами в спокойной атмосфере — за чашкой изысканного чая в Майами.</p>
     <a href="#register" class="hero-cta">
-      Reserve Your Seat <span class="arrow">&rarr;</span>
+      <span data-ru="Зарегистрироваться" data-en="Reserve Your Seat">Зарегистрироваться</span> <span class="arrow">&rarr;</span>
     </a>
   </section>
 
   <!-- 2. About the Meeting -->
   <section class="section">
-    <h2 class="section-title">Why Attend</h2>
+    <h2 class="section-title" data-ru="Почему стоит прийти" data-en="Why Attend">Почему стоит прийти</h2>
     <div class="cards-grid">
       <div class="card animate-on-scroll">
-        <div class="card-icon">🧘</div>
-        <h3>Calm Atmosphere</h3>
-        <p>No pressure, no hard sells — just a peaceful space to explore your financial questions over tea.</p>
+        <div class="card-icon">&#129495;</div>
+        <h3 data-ru="Спокойная атмосфера" data-en="Calm Atmosphere">Спокойная атмосфера</h3>
+        <p data-ru="Никакого давления — только уютное пространство, чтобы разобраться в своих финансовых вопросах за чашкой чая." data-en="No pressure, no hard sells — just a peaceful space to explore your financial questions over tea.">Никакого давления — только уютное пространство, чтобы разобраться в своих финансовых вопросах за чашкой чая.</p>
       </div>
       <div class="card animate-on-scroll">
-        <div class="card-icon">📚</div>
-        <h3>Useful Knowledge</h3>
-        <p>Practical tips and strategies you can start using right away, explained in plain language.</p>
+        <div class="card-icon">&#128218;</div>
+        <h3 data-ru="Полезные знания" data-en="Useful Knowledge">Полезные знания</h3>
+        <p data-ru="Практичные советы и стратегии, которые можно использовать сразу, объяснённые простым языком." data-en="Practical tips and strategies you can start using right away, explained in plain language.">Практичные советы и стратегии, которые можно использовать сразу, объяснённые простым языком.</p>
       </div>
       <div class="card animate-on-scroll">
-        <div class="card-icon">🛡️</div>
-        <h3>Confidence in the Future</h3>
-        <p>Walk away with a clearer picture of your finances and actionable steps toward your goals.</p>
+        <div class="card-icon">&#128737;&#65039;</div>
+        <h3 data-ru="Уверенность в будущем" data-en="Confidence in the Future">Уверенность в будущем</h3>
+        <p data-ru="Уйдёте с ясным пониманием своих финансов и конкретными шагами к достижению целей." data-en="Walk away with a clearer picture of your finances and actionable steps toward your goals.">Уйдёте с ясным пониманием своих финансов и конкретными шагами к достижению целей.</p>
       </div>
     </div>
   </section>
 
   <!-- 3. What You'll Learn -->
   <section class="section" style="background: linear-gradient(180deg, var(--bg) 0%, #f5f2ed 100%);">
-    <h2 class="section-title">What You'll Learn</h2>
+    <h2 class="section-title" data-ru="Что вы узнаете" data-en="What You'll Learn">Что вы узнаете</h2>
     <div class="cards-grid-4">
       <div class="learn-card animate-on-scroll">
-        <div class="card-icon">💰</div>
-        <h3>Building Capital</h3>
-        <p>Smart saving and investing strategies for every income level.</p>
+        <div class="card-icon">&#128176;</div>
+        <h3 data-ru="Накопление капитала" data-en="Building Capital">Накопление капитала</h3>
+        <p data-ru="Стратегии накоплений и инвестирования для любого уровня дохода." data-en="Smart saving and investing strategies for every income level.">Стратегии накоплений и инвестирования для любого уровня дохода.</p>
       </div>
       <div class="learn-card animate-on-scroll">
-        <div class="card-icon">📊</div>
-        <h3>Tax Optimization</h3>
-        <p>Legal ways to reduce your tax burden and keep more of your earnings.</p>
+        <div class="card-icon">&#128200;</div>
+        <h3 data-ru="Оптимизация налогов" data-en="Tax Optimization">Оптимизация налогов</h3>
+        <p data-ru="Легальные способы снизить налоговую нагрузку и сохранить больше денег." data-en="Legal ways to reduce your tax burden and keep more of your earnings.">Легальные способы снизить налоговую нагрузку и сохранить больше денег.</p>
       </div>
       <div class="learn-card animate-on-scroll">
-        <div class="card-icon">🔓</div>
-        <h3>Getting Out of Debt</h3>
-        <p>Proven methods to eliminate debt faster and regain financial freedom.</p>
+        <div class="card-icon">&#128275;</div>
+        <h3 data-ru="Выход из долгов" data-en="Getting Out of Debt">Выход из долгов</h3>
+        <p data-ru="Проверенные методы погашения долгов и обретения финансовой свободы." data-en="Proven methods to eliminate debt faster and regain financial freedom.">Проверенные методы погашения долгов и обретения финансовой свободы.</p>
       </div>
       <div class="learn-card animate-on-scroll">
-        <div class="card-icon">🏖️</div>
-        <h3>Retirement Planning</h3>
-        <p>Build the retirement you deserve, no matter where you are today.</p>
+        <div class="card-icon">&#127958;&#65039;</div>
+        <h3 data-ru="Планирование пенсии" data-en="Retirement Planning">Планирование пенсии</h3>
+        <p data-ru="Как обеспечить себе комфортную пенсию вне зависимости от текущей ситуации." data-en="Build the retirement you deserve, no matter where you are today.">Как обеспечить себе комфортную пенсию вне зависимости от текущей ситуации.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. Meeting Format -->
-  <section class="format-strip">
-    <h2 class="section-title">Meeting Format</h2>
-    <div class="format-items">
-      <div class="format-item animate-on-scroll">
-        <div class="fmt-icon">🫖</div>
-        <h4>Cozy Atmosphere</h4>
-        <p>A genuine tea ceremony experience</p>
-      </div>
-      <div class="format-item animate-on-scroll">
-        <div class="fmt-icon">💬</div>
-        <h4>Live Conversation</h4>
-        <p>Ask questions, share experiences</p>
-      </div>
-      <div class="format-item animate-on-scroll">
-        <div class="fmt-icon">✨</div>
-        <h4>Simple Explanations</h4>
-        <p>Complex topics, easy language</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 5. Who Is This For -->
-  <section class="section">
-    <h2 class="section-title">Who Is This For</h2>
-    <ul class="for-list">
-      <li class="animate-on-scroll">
-        <span class="check">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        </span>
-        Anyone who wants to take control of their personal finances but doesn't know where to start
-      </li>
-      <li class="animate-on-scroll">
-        <span class="check">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        </span>
-        Families looking to build a solid financial foundation and protect their future
-      </li>
-      <li class="animate-on-scroll">
-        <span class="check">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-        </span>
-        Professionals who earn well but feel their money could be working harder for them
-      </li>
-    </ul>
-  </section>
-
-  <!-- 6. About the Speakers -->
+  <!-- 4. About the Speakers -->
   <section class="section" style="background: linear-gradient(180deg, var(--bg) 0%, #f5f2ed 100%);">
-    <h2 class="section-title">Meet the Speakers</h2>
+    <h2 class="section-title" data-ru="Спикеры" data-en="Meet the Speakers">Спикеры</h2>
     <div class="speakers-grid">
       <div class="speaker-card animate-on-scroll">
-        <div class="speaker-avatar">👩‍💼</div>
+        <img src="images/gerner.jpg" alt="Anastasia Gerner" class="speaker-avatar">
         <h3>Anastasia Gerner</h3>
-        <div class="speaker-role">Financial Advisor</div>
-        <p>Certified financial planner helping families in Miami build wealth, protect income, and plan for a confident retirement.</p>
+        <div class="speaker-role" data-ru="Финансовый консультант" data-en="Financial Advisor">Финансовый консультант</div>
+        <p data-ru="Сертифицированный финансовый планировщик, помогающий семьям в Майами строить капитал, защищать доход и планировать уверенную пенсию." data-en="Certified financial planner helping families in Miami build wealth, protect income, and plan for a confident retirement.">Сертифицированный финансовый планировщик, помогающий семьям в Майами строить капитал, защищать доход и планировать уверенную пенсию.</p>
       </div>
       <div class="speaker-card animate-on-scroll">
-        <div class="speaker-avatar">👩‍🏫</div>
+        <img src="images/tamara-peri.jpeg" alt="Tamara Peri" class="speaker-avatar">
         <h3>Tamara Peri</h3>
-        <div class="speaker-role">Tax & Insurance Specialist</div>
-        <p>Expert in tax optimization and insurance strategies. Passionate about making complex financial concepts simple and actionable.</p>
+        <div class="speaker-role" data-ru="Специалист по налогам и страхованию" data-en="Tax & Insurance Specialist">Специалист по налогам и страхованию</div>
+        <p data-ru="Эксперт по оптимизации налогов и страховым стратегиям. Делает сложные финансовые темы простыми и понятными." data-en="Expert in tax optimization and insurance strategies. Passionate about making complex financial concepts simple and actionable.">Эксперт по оптимизации налогов и страховым стратегиям. Делает сложные финансовые темы простыми и понятными.</p>
       </div>
     </div>
   </section>
 
-  <!-- 7. Event Details -->
+  <!-- 5. Event Details -->
   <section class="section">
-    <h2 class="section-title">Event Details</h2>
+    <h2 class="section-title" data-ru="Детали мероприятия" data-en="Event Details">Детали мероприятия</h2>
     <div class="details-card animate-on-scroll">
       <div class="detail-row">
-        <div class="detail-icon">📍</div>
+        <div class="detail-icon">&#128205;</div>
         <div class="detail-text">
-          <div class="detail-label">Address</div>
+          <div class="detail-label" data-ru="Адрес" data-en="Address">Адрес</div>
           <div class="detail-value">7139 Collins Ave, Miami Beach, FL 33141</div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">📅</div>
+        <div class="detail-icon">&#128197;</div>
         <div class="detail-text">
-          <div class="detail-label">Date & Time</div>
-          <div class="detail-value">May 16th, 2026 at 2:00 PM</div>
+          <div class="detail-label" data-ru="Дата и время" data-en="Date & Time">Дата и время</div>
+          <div class="detail-value" data-ru="16 мая 2026, 14:00" data-en="May 16th, 2026 at 2:00 PM">16 мая 2026, 14:00</div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">📞</div>
+        <div class="detail-icon">&#128222;</div>
         <div class="detail-text">
-          <div class="detail-label">Phone</div>
+          <div class="detail-label" data-ru="Телефон" data-en="Phone">Телефон</div>
           <div class="detail-value"><a href="tel:+13051234567">(305) 123-4567</a></div>
         </div>
       </div>
       <div class="detail-row">
-        <div class="detail-icon">📸</div>
+        <div class="detail-icon">&#128248;</div>
         <div class="detail-text">
           <div class="detail-label">Instagram</div>
           <div class="detail-value"><a href="https://instagram.com/" target="_blank" rel="noopener">@financialteameeting</a></div>
@@ -1054,101 +952,101 @@
     </div>
   </section>
 
-  <!-- 8. Bonus -->
+  <!-- 6. Bonus -->
   <section class="section">
     <div class="bonus-banner animate-on-scroll">
-      <div class="bonus-icon">🎁</div>
-      <h3>Bonus for Every Participant</h3>
-      <p>Each attendee receives a complimentary mini personal financial review — a personalized snapshot of your financial health with actionable next steps.</p>
+      <div class="bonus-icon">&#127873;</div>
+      <h3 data-ru="Бонус для каждого участника" data-en="Bonus for Every Participant">Бонус для каждого участника</h3>
+      <p data-ru="Каждый участник получает бесплатный мини-разбор личных финансов — персональный снимок вашего финансового здоровья с рекомендациями." data-en="Each attendee receives a complimentary mini personal financial review — a personalized snapshot of your financial health with actionable next steps.">Каждый участник получает бесплатный мини-разбор личных финансов — персональный снимок вашего финансового здоровья с рекомендациями.</p>
     </div>
   </section>
 
-  <!-- 9. Registration Form -->
+  <!-- 7. Registration Form -->
   <section class="section" id="register">
-    <h2 class="section-title">Register Now</h2>
+    <h2 class="section-title" data-ru="Регистрация" data-en="Register Now">Регистрация</h2>
     <div class="form-wrapper">
       <div class="form-card">
         <form id="teaMeetForm">
 
           <!-- Personal Info -->
-          <div class="form-section-title">Personal Information</div>
+          <div class="form-section-title" data-ru="Личная информация" data-en="Personal Information">Личная информация</div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="firstName">First Name <span class="required">*</span></label>
-              <input type="text" id="firstName" placeholder="Jane" required>
+              <label for="firstName"><span data-ru="Имя" data-en="First Name">Имя</span> <span class="required">*</span></label>
+              <input type="text" id="firstName" data-placeholder-ru="Анна" data-placeholder-en="Jane" placeholder="Анна" required>
             </div>
             <div class="form-group">
-              <label for="lastName">Last Name <span class="required">*</span></label>
-              <input type="text" id="lastName" placeholder="Doe" required>
+              <label for="lastName"><span data-ru="Фамилия" data-en="Last Name">Фамилия</span> <span class="required">*</span></label>
+              <input type="text" id="lastName" data-placeholder-ru="Иванова" data-placeholder-en="Doe" placeholder="Иванова" required>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="phone">Phone Number <span class="required">*</span></label>
+              <label for="phone"><span data-ru="Телефон" data-en="Phone Number">Телефон</span> <span class="required">*</span></label>
               <input type="tel" id="phone" placeholder="(555) 123-4567" required>
             </div>
             <div class="form-group">
-              <label for="email">Email Address <span class="required">*</span></label>
-              <input type="email" id="email" placeholder="jane@example.com" required>
+              <label for="email"><span data-ru="Email" data-en="Email Address">Email</span> <span class="required">*</span></label>
+              <input type="email" id="email" data-placeholder-ru="anna@example.com" data-placeholder-en="jane@example.com" placeholder="anna@example.com" required>
             </div>
           </div>
 
           <div class="form-divider"></div>
 
           <!-- Optional Info -->
-          <div class="form-section-title">Optional Information</div>
+          <div class="form-section-title" data-ru="Дополнительно" data-en="Optional Information">Дополнительно</div>
 
           <div class="form-group">
-            <label>Do you have children?</label>
+            <label><span data-ru="Есть ли у вас дети?" data-en="Do you have children?">Есть ли у вас дети?</span></label>
             <div class="radio-group">
               <div class="radio-option">
                 <input type="radio" id="children-yes" name="hasChildren" value="Yes">
                 <label for="children-yes">
                   <span class="radio-dot"></span>
-                  Yes
+                  <span data-ru="Да" data-en="Yes">Да</span>
                 </label>
               </div>
               <div class="radio-option">
                 <input type="radio" id="children-no" name="hasChildren" value="No">
                 <label for="children-no">
                   <span class="radio-dot"></span>
-                  No
+                  <span data-ru="Нет" data-en="No">Нет</span>
                 </label>
               </div>
             </div>
           </div>
 
           <div class="form-group">
-            <label>What topics interest you most?</label>
+            <label><span data-ru="Какие темы вас интересуют?" data-en="What topics interest you most?">Какие темы вас интересуют?</span></label>
             <div class="checkbox-group">
               <div class="checkbox-option">
                 <input type="checkbox" id="int-invest" name="interests" value="Investments">
                 <label for="int-invest">
                   <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-                  Investments
+                  <span data-ru="Инвестиции" data-en="Investments">Инвестиции</span>
                 </label>
               </div>
               <div class="checkbox-option">
                 <input type="checkbox" id="int-insurance" name="interests" value="Insurance">
                 <label for="int-insurance">
                   <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-                  Insurance
+                  <span data-ru="Страхование" data-en="Insurance">Страхование</span>
                 </label>
               </div>
               <div class="checkbox-option">
                 <input type="checkbox" id="int-retirement" name="interests" value="Retirement">
                 <label for="int-retirement">
                   <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
-                  Retirement
+                  <span data-ru="Пенсия" data-en="Retirement">Пенсия</span>
                 </label>
               </div>
             </div>
           </div>
 
           <button type="submit" class="submit-btn">
-            Register & Pay <span class="arrow">&rarr;</span>
+            <span data-ru="Зарегистрироваться" data-en="Register">Зарегистрироваться</span> <span class="arrow">&rarr;</span>
           </button>
         </form>
 
@@ -1159,14 +1057,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
             </svg>
           </div>
-          <h2>You're All Set!</h2>
-          <p>Your registration is confirmed and payment received. We look forward to seeing you at the Financial Tea Meeting!</p>
+          <h2 data-ru="Вы зарегистрированы!" data-en="You're All Set!">Вы зарегистрированы!</h2>
+          <p data-ru="Регистрация подтверждена. Мы свяжемся с вами с деталями мероприятия!" data-en="Your registration is confirmed. We'll reach out with event details soon!">Регистрация подтверждена. Мы свяжемся с вами с деталями мероприятия!</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 10. Footer -->
+  <!-- 8. Footer -->
   <div class="footer">
     <p>&copy; 2026 Financial Tea Meeting</p>
     <div class="footer-links">
@@ -1175,43 +1073,26 @@
     </div>
   </div>
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+    // --- Language Toggle ---
+    function setLang(lang) {
+      localStorage.setItem('tea-meet-lang', lang);
+      document.getElementById('btn-ru').classList.toggle('active', lang === 'ru');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.documentElement.lang = lang;
 
-  <script>
-    // --- Check URL params on load ---
-    (function() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('success') === '1') {
-        const form = document.getElementById('teaMeetForm');
-        if (form) form.style.display = 'none';
-        document.getElementById('successMessage').classList.add('show');
-        document.getElementById('register').scrollIntoView({ behavior: 'smooth' });
-      } else if (params.get('canceled') === '1') {
-        alert('Payment was canceled. You can try registering again.');
-      }
-    })();
+      document.querySelectorAll('[data-ru][data-en]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
 
-    // --- Phone formatting ---
-    const phoneInput = document.getElementById('phone');
-    phoneInput.addEventListener('input', (e) => {
-      let val = e.target.value.replace(/\D/g, '');
-      if (val.length > 10) val = val.slice(0, 10);
-      if (val.length >= 7) {
-        val = `(${val.slice(0,3)}) ${val.slice(3,6)}-${val.slice(6)}`;
-      } else if (val.length >= 4) {
-        val = `(${val.slice(0,3)}) ${val.slice(3)}`;
-      } else if (val.length >= 1) {
-        val = `(${val}`;
-      }
-      e.target.value = val;
-    });
+      document.querySelectorAll('[data-placeholder-ru][data-placeholder-en]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+      });
+    }
+
+    // Initialize language
+    const savedLang = localStorage.getItem('tea-meet-lang') || 'ru';
+    setLang(savedLang);
 
     // --- Smooth scroll for CTA ---
     document.querySelector('.hero-cta').addEventListener('click', (e) => {
@@ -1225,9 +1106,10 @@
       const form = e.target;
       const btn = form.querySelector('.submit-btn');
       const btnText = btn.innerHTML;
+      const lang = localStorage.getItem('tea-meet-lang') || 'ru';
 
       btn.disabled = true;
-      btn.innerHTML = 'Processing\u2026';
+      btn.innerHTML = lang === 'ru' ? 'Отправка\u2026' : 'Sending\u2026';
 
       const interests = Array.from(
         form.querySelectorAll('input[name="interests"]:checked')
@@ -1245,36 +1127,19 @@
       };
 
       try {
-        // Step 1: Send registration to Telegram
-        const regRes = await fetch('/api/tea-meet-register', {
+        const res = await fetch('/api/tea-meet-register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
 
-        if (!regRes.ok) throw new Error('Registration failed');
+        if (!res.ok) throw new Error('Registration failed');
 
-        // Step 2: Create Stripe Checkout session
-        const checkoutRes = await fetch('/api/tea-meet-checkout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName,
-          }),
-        });
-
-        if (!checkoutRes.ok) throw new Error('Checkout failed');
-
-        const checkout = await checkoutRes.json();
-        if (checkout.success && checkout.url) {
-          window.location.href = checkout.url;
-        } else {
-          throw new Error(checkout.error || 'No checkout URL');
-        }
+        form.style.display = 'none';
+        document.getElementById('successMessage').classList.add('show');
       } catch (err) {
-        alert('Something went wrong. Please try again.');
+        const lang = localStorage.getItem('tea-meet-lang') || 'ru';
+        alert(lang === 'ru' ? 'Произошла ошибка. Попробуйте ещё раз.' : 'Something went wrong. Please try again.');
         btn.disabled = false;
         btn.innerHTML = btnText;
       }

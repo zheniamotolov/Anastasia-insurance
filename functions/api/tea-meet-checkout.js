@@ -6,19 +6,27 @@ export async function onRequestPost(context) {
 
   try {
     const data = await context.request.json();
-    const { email, firstName, lastName } = data;
 
     const origin = new URL(context.request.url).origin;
 
     const params = new URLSearchParams();
     params.append('mode', 'payment');
-    params.append('success_url', `${origin}/tea-meet.html?success=1`);
-    params.append('cancel_url', `${origin}/tea-meet.html?canceled=1`);
-    params.append('customer_email', email);
+    params.append('success_url', `${origin}/tea-meet-purchase.html?success=1`);
+    params.append('cancel_url', `${origin}/tea-meet-purchase.html?canceled=1`);
     params.append('line_items[0][price]', context.env.STRIPE_PRICE_ID);
     params.append('line_items[0][quantity]', '1');
-    params.append('metadata[firstName]', firstName || '');
-    params.append('metadata[lastName]', lastName || '');
+
+    // Only include customer_email if provided
+    if (data.email) {
+      params.append('customer_email', data.email);
+    }
+
+    if (data.firstName) {
+      params.append('metadata[firstName]', data.firstName);
+    }
+    if (data.lastName) {
+      params.append('metadata[lastName]', data.lastName);
+    }
 
     const res = await fetch('https://api.stripe.com/v1/checkout/sessions', {
       method: 'POST',
