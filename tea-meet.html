@@ -43,6 +43,7 @@
       line-height: 1.6;
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     .container {
@@ -717,6 +718,8 @@
       display: none;
       text-align: center;
       padding: 60px 40px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .success-message.show {
@@ -818,11 +821,30 @@
       .form-card { padding: 32px 24px; }
       .form-row { grid-template-columns: 1fr; }
       .checkbox-group { grid-template-columns: 1fr; }
+      .success-message { padding: 40px 20px; }
+      .success-message h2 { font-size: 1.5rem; }
+      .success-message p { font-size: 14px; }
     }
 
     @media (max-width: 480px) {
+      .hero { padding: 60px 16px 48px; }
+      .hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+      .hero p { font-size: 1rem; margin-bottom: 28px; }
+      .hero-cta { padding: 14px 28px; font-size: 15px; }
+      .section { padding: 48px 16px; }
+      .section-title { font-size: 1.5rem; margin-bottom: 32px; }
       .cards-grid-4 { grid-template-columns: 1fr; }
+      .learn-card { padding: 24px 16px; }
+      .speaker-card { padding: 28px 20px; }
+      .details-card { padding: 24px 16px; }
+      .bonus-banner { padding: 24px 16px; }
+      .form-wrapper { padding: 0 4px; }
+      .form-card { padding: 24px 16px; }
+      .form-section-title { font-size: 11px; }
       .radio-group { flex-direction: column; }
+      .success-message { padding: 32px 12px; }
+      .success-message h2 { font-size: 1.3rem; word-break: break-word; }
+      .success-message p { font-size: 13px; max-width: 100%; }
       .lang-toggle { top: 10px; right: 10px; }
     }
   </style>
