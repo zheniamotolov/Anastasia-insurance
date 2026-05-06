@@ -778,7 +778,8 @@
     .footer .footer-links {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      flex-wrap: wrap;
+      gap: 12px 20px;
       margin-top: 8px;
     }
 
@@ -828,23 +829,37 @@
 
     @media (max-width: 480px) {
       .hero { padding: 60px 16px 48px; }
+      .hero-icon { font-size: 40px; margin-bottom: 16px; }
+      .hero-badge { font-size: 12px; padding: 6px 14px; margin-bottom: 20px; }
       .hero h1 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
-      .hero p { font-size: 1rem; margin-bottom: 28px; }
+      .hero p { font-size: 0.95rem; margin-bottom: 28px; }
       .hero-cta { padding: 14px 28px; font-size: 15px; }
       .section { padding: 48px 16px; }
-      .section-title { font-size: 1.5rem; margin-bottom: 32px; }
+      .section-title { font-size: 1.4rem; margin-bottom: 28px; }
       .cards-grid-4 { grid-template-columns: 1fr; }
+      .card { padding: 28px 20px; }
+      .card-icon { width: 48px; height: 48px; font-size: 22px; }
       .learn-card { padding: 24px 16px; }
       .speaker-card { padding: 28px 20px; }
+      .speaker-avatar { width: 80px; height: 80px; }
+      .speaker-card h3 { font-size: 1.1rem; }
+      .speaker-card p { font-size: 13px; }
       .details-card { padding: 24px 16px; }
+      .detail-row .detail-icon { width: 36px; height: 36px; font-size: 16px; }
+      .detail-row .detail-value { font-size: 14px; }
       .bonus-banner { padding: 24px 16px; }
+      .bonus-banner h3 { font-size: 1.2rem; }
+      .bonus-banner p { font-size: 14px; }
       .form-wrapper { padding: 0 4px; }
       .form-card { padding: 24px 16px; }
       .form-section-title { font-size: 11px; }
       .radio-group { flex-direction: column; }
+      .submit-btn { padding: 14px 24px; font-size: 15px; }
       .success-message { padding: 32px 12px; }
       .success-message h2 { font-size: 1.3rem; word-break: break-word; }
       .success-message p { font-size: 13px; max-width: 100%; }
+      .footer { padding: 32px 16px 40px; }
+      .footer .footer-links { gap: 10px 16px; }
       .lang-toggle { top: 10px; right: 10px; }
     }
   </style>
