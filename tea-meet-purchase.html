@@ -440,58 +440,239 @@
       margin: 0 auto;
     }
 
-    /* --- Payment Card --- */
-    .payment-wrapper {
-      max-width: 520px;
+    /* --- Form Container --- */
+    .form-wrapper {
+      max-width: 680px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
-    .payment-card {
+    .form-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 48px 40px;
       box-shadow: var(--shadow-md);
-      text-align: center;
     }
 
-    .payment-card .payment-icon {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .payment-card .payment-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 12px;
-    }
-
-    .payment-card .payment-description {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 24px;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .payment-card .payment-price {
-      display: inline-block;
-      padding: 8px 20px;
-      background: var(--accent-light);
-      border: 1px solid var(--accent);
-      border-radius: 100px;
-      font-size: 14px;
+    .form-section-title {
+      font-size: 12px;
       font-weight: 600;
-      color: var(--accent);
-      margin-bottom: 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .pay-btn {
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    label .required {
+      color: #ef4444;
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      outline: none;
+      transition: var(--transition);
+      appearance: none;
+    }
+
+    input::placeholder {
+      color: var(--text-muted);
+    }
+
+    input:hover {
+      border-color: #c5bfb6;
+    }
+
+    input:focus {
+      border-color: var(--accent);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(107,143,113,0.12);
+    }
+
+    /* --- Radio Group --- */
+    .radio-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .radio-option {
+      position: relative;
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .radio-option label:hover {
+      border-color: #c5bfb6;
+    }
+
+    .radio-option input:checked + label {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .radio-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+
+    .radio-option input:checked + label .radio-dot {
+      border-color: var(--accent);
+    }
+
+    .radio-dot::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .radio-option input:checked + label .radio-dot::after {
+      opacity: 1;
+    }
+
+    /* --- Checkbox Group --- */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .checkbox-option {
+      position: relative;
+    }
+
+    .checkbox-option input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .checkbox-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 400;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .checkbox-option label:hover {
+      border-color: #c5bfb6;
+    }
+
+    .checkbox-option input:checked + label {
+      border-color: var(--accent);
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--transition);
+      background: var(--surface);
+    }
+
+    .checkbox-option input:checked + label .check-icon {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .check-icon svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .checkbox-option input:checked + label .check-icon svg {
+      opacity: 1;
+    }
+
+    /* --- Form Divider --- */
+    .form-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    /* --- Submit --- */
+    .submit-btn {
       width: 100%;
       padding: 16px 32px;
       font-family: 'Inter', sans-serif;
@@ -503,22 +684,35 @@
       border-radius: var(--radius);
       cursor: pointer;
       transition: var(--transition);
+      margin-top: 12px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .pay-btn:hover {
+    .submit-btn:hover {
       background: var(--accent-hover);
       transform: translateY(-1px);
       box-shadow: 0 6px 20px rgba(107,143,113,0.3);
     }
 
-    .pay-btn:active {
+    .submit-btn:active {
       transform: translateY(0);
     }
 
-    .pay-btn:disabled {
+    .submit-btn:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
+    }
+
+    .submit-btn .arrow {
+      display: inline-block;
+      margin-left: 8px;
+      transition: transform 0.2s ease;
+    }
+
+    .submit-btn:hover .arrow {
+      transform: translateX(4px);
     }
 
     /* --- Success State --- */
@@ -533,10 +727,6 @@
     .success-message.show {
       display: block;
       animation: fadeInUp 0.4s ease-out;
-    }
-
-    .default-state.hide {
-      display: none;
     }
 
     .success-icon {
@@ -630,7 +820,9 @@
       .speakers-grid { grid-template-columns: 1fr; gap: 20px; }
       .details-card { padding: 32px 24px; }
       .bonus-banner { padding: 32px 24px; }
-      .payment-card { padding: 32px 24px; }
+      .form-card { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .checkbox-group { grid-template-columns: 1fr; }
       .success-message { padding: 40px 20px; }
       .success-message h2 { font-size: 1.5rem; }
       .success-message p { font-size: 14px; }
@@ -648,10 +840,10 @@
       .speaker-card { padding: 28px 20px; }
       .details-card { padding: 24px 16px; }
       .bonus-banner { padding: 24px 16px; }
-      .payment-wrapper { padding: 0 4px; }
-      .payment-card { padding: 24px 16px; }
-      .payment-card .payment-title { font-size: 1.3rem; word-break: break-word; }
-      .payment-card .payment-description { font-size: 14px; }
+      .form-wrapper { padding: 0 4px; }
+      .form-card { padding: 24px 16px; }
+      .form-section-title { font-size: 11px; }
+      .radio-group { flex-direction: column; }
       .success-message { padding: 32px 12px; }
       .success-message h2 { font-size: 1.3rem; word-break: break-word; }
       .success-message p { font-size: 13px; max-width: 100%; }
@@ -796,19 +988,94 @@
     </div>
   </section>
 
-  <!-- 7. Payment -->
+  <!-- 7. Registration & Payment -->
   <section class="section" id="payment">
-    <h2 class="section-title" data-ru="Оплата" data-en="Payment">Оплата</h2>
-    <div class="payment-wrapper">
-      <div class="payment-card">
-        <!-- Default State -->
-        <div class="default-state" id="defaultState">
-          <div class="payment-icon">&#128179;</div>
-          <div class="payment-title" data-ru="Оплатить участие" data-en="Pay for Your Seat">Оплатить участие</div>
-          <p class="payment-description" data-ru="Забронируйте своё место на Финансовом чаепитии. После оплаты мы отправим вам подтверждение и все детали." data-en="Reserve your spot at the Financial Tea Party. After payment, we'll send you a confirmation with all the details.">Забронируйте своё место на Финансовом чаепитии. После оплаты мы отправим вам подтверждение и все детали.</p>
-          <div class="payment-price" data-ru="Участие платное" data-en="Paid event">Участие платное</div>
-          <button class="pay-btn" id="payBtn" data-ru="Оплатить" data-en="Pay Now">Оплатить</button>
-        </div>
+    <h2 class="section-title" data-ru="Регистрация и оплата" data-en="Register & Pay">Регистрация и оплата</h2>
+    <div class="form-wrapper">
+      <div class="form-card">
+        <form id="registerPayForm">
+
+          <!-- Personal Info -->
+          <div class="form-section-title" data-ru="Личная информация" data-en="Personal Information">Личная информация</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName"><span data-ru="Имя" data-en="First Name">Имя</span> <span class="required">*</span></label>
+              <input type="text" id="firstName" data-placeholder-ru="Анна" data-placeholder-en="Jane" placeholder="Анна" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName"><span data-ru="Фамилия" data-en="Last Name">Фамилия</span> <span class="required">*</span></label>
+              <input type="text" id="lastName" data-placeholder-ru="Иванова" data-placeholder-en="Doe" placeholder="Иванова" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone"><span data-ru="Телефон" data-en="Phone Number">Телефон</span> <span class="required">*</span></label>
+              <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+            </div>
+            <div class="form-group">
+              <label for="email"><span data-ru="Email" data-en="Email Address">Email</span> <span class="required">*</span></label>
+              <input type="email" id="email" data-placeholder-ru="anna@example.com" data-placeholder-en="jane@example.com" placeholder="anna@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <!-- Optional Info -->
+          <div class="form-section-title" data-ru="Дополнительно" data-en="Optional Information">Дополнительно</div>
+
+          <div class="form-group">
+            <label><span data-ru="Есть ли у вас дети?" data-en="Do you have children?">Есть ли у вас дети?</span></label>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="children-yes" name="hasChildren" value="Yes">
+                <label for="children-yes">
+                  <span class="radio-dot"></span>
+                  <span data-ru="Да" data-en="Yes">Да</span>
+                </label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="children-no" name="hasChildren" value="No">
+                <label for="children-no">
+                  <span class="radio-dot"></span>
+                  <span data-ru="Нет" data-en="No">Нет</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><span data-ru="Какие темы вас интересуют?" data-en="What topics interest you most?">Какие темы вас интересуют?</span></label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-invest" name="interests" value="Investments">
+                <label for="int-invest">
+                  <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                  <span data-ru="Инвестиции" data-en="Investments">Инвестиции</span>
+                </label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-insurance" name="interests" value="Insurance">
+                <label for="int-insurance">
+                  <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                  <span data-ru="Страхование" data-en="Insurance">Страхование</span>
+                </label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="int-retirement" name="interests" value="Retirement">
+                <label for="int-retirement">
+                  <span class="check-icon"><svg fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+                  <span data-ru="Пенсия" data-en="Retirement">Пенсия</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <span data-ru="Зарегистрироваться и оплатить" data-en="Register & Pay">Зарегистрироваться и оплатить</span> <span class="arrow">&rarr;</span>
+          </button>
+        </form>
 
         <!-- Success State -->
         <div class="success-message" id="successMessage">
@@ -818,7 +1085,7 @@
             </svg>
           </div>
           <h2 data-ru="Оплата прошла успешно!" data-en="Payment Successful!">Оплата прошла успешно!</h2>
-          <p data-ru="Спасибо! Мы свяжемся с вами с деталями мероприятия." data-en="Thank you! We'll reach out with event details soon.">Спасибо! Мы свяжемся с вами с деталями мероприятия.</p>
+          <p data-ru="Спасибо! Вы зарегистрированы. Мы свяжемся с вами с деталями мероприятия." data-en="Thank you! You're registered. We'll reach out with event details soon.">Спасибо! Вы зарегистрированы. Мы свяжемся с вами с деталями мероприятия.</p>
         </div>
       </div>
     </div>
@@ -845,6 +1112,10 @@
       document.querySelectorAll('[data-ru][data-en]').forEach(el => {
         el.textContent = el.getAttribute('data-' + lang);
       });
+
+      document.querySelectorAll('[data-placeholder-ru][data-placeholder-en]').forEach(el => {
+        el.placeholder = el.getAttribute('data-placeholder-' + lang);
+      });
     }
 
     // Initialize language
@@ -861,7 +1132,8 @@
     const params = new URLSearchParams(window.location.search);
 
     if (params.get('success') === '1') {
-      document.getElementById('defaultState').classList.add('hide');
+      const form = document.getElementById('registerPayForm');
+      if (form) form.style.display = 'none';
       document.getElementById('successMessage').classList.add('show');
       setTimeout(() => {
         document.getElementById('payment').scrollIntoView({ behavior: 'smooth' });
@@ -873,31 +1145,64 @@
       alert(lang === 'ru' ? 'Оплата была отменена. Вы можете попробовать снова.' : 'Payment was canceled. You can try again.');
     }
 
-    // --- Pay Button ---
-    document.getElementById('payBtn').addEventListener('click', async () => {
-      const btn = document.getElementById('payBtn');
+    // --- Form Submit: Register then redirect to Stripe ---
+    document.getElementById('registerPayForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.submit-btn');
+      const btnText = btn.innerHTML;
       const lang = localStorage.getItem('tea-meet-lang') || 'ru';
+
       btn.disabled = true;
-      btn.textContent = lang === 'ru' ? 'Перенаправление\u2026' : 'Redirecting\u2026';
+      btn.innerHTML = lang === 'ru' ? 'Обработка\u2026' : 'Processing\u2026';
+
+      const interests = Array.from(
+        form.querySelectorAll('input[name="interests"]:checked')
+      ).map(cb => cb.value);
+
+      const hasChildrenEl = form.querySelector('input[name="hasChildren"]:checked');
+
+      const regData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        hasChildren: hasChildrenEl ? hasChildrenEl.value : '',
+        interests,
+      };
 
       try {
-        const res = await fetch('/api/tea-meet-checkout', {
+        // Step 1: Send registration to Telegram bot
+        const regRes = await fetch('/api/tea-meet-register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({}),
+          body: JSON.stringify(regData),
         });
 
-        const result = await res.json();
+        if (!regRes.ok) throw new Error('Registration failed');
 
-        if (result.url) {
-          window.location.href = result.url;
+        // Step 2: Create Stripe checkout session
+        const checkoutRes = await fetch('/api/tea-meet-checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: regData.email,
+            firstName: regData.firstName,
+            lastName: regData.lastName,
+          }),
+        });
+
+        const checkoutResult = await checkoutRes.json();
+
+        if (checkoutResult.url) {
+          window.location.href = checkoutResult.url;
         } else {
           throw new Error('No checkout URL');
         }
       } catch (err) {
         alert(lang === 'ru' ? 'Произошла ошибка. Попробуйте ещё раз.' : 'Something went wrong. Please try again.');
         btn.disabled = false;
-        btn.textContent = btn.getAttribute('data-' + lang);
+        btn.innerHTML = btnText;
       }
     });
 
